@@ -1,0 +1,5 @@
+<p>login into <%= link_to "monitor.#{DOMAIN}", "http://monitor.#{DOMAIN}/?email=#{@user.email}" %> 
+</p>
+<% for site in @user.site_stats %>
+  <%= render "sites/stats", :object => site %>
+<% end %>

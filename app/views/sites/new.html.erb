@@ -1,0 +1,89 @@
+<% title = (@action == :edit ? 'update' : 'set up new') %>
+
+<h1><%= title %> site monitoring</h1>
+
+
+<% form_for(@site) do |f| %>
+
+  <%= f.error_messages %>
+
+  <%= @errors = @site.errors %>
+
+
+  <%= forms_selection('refresh cycle (seconds)', f, :ccycle, Site.options[:cycle]) %>
+
+  <%= forms_selection('notification level', f, :notification, [:silent, :alert, :critical, :verbose]) %>
+
+  <%#= forms_selection('notification level', f, :warn, Array.new ) %>
+
+  <%#= forms_selection('monitoring type', f, :type, 
+                      [{
+    :option => :url,
+    :sub => f.text_field(:url)}, {
+    :option => :reverse,
+    :sub => f.text_field(:reverse) }
+  ]
+                      ) %>
+        
+  <%= forms_selection('monitoring direction', f, :direction, [:url, :reverse]) %>
+
+  <p>URL or reverse alias: <br/><%= f.text_field :url_reverse %> </p>
+
+
+
+  <% action = (@action == :edit ? 'update' : 'create') %>
+  <%= f.submit action %>
+
+  <br/>
+  <br/>
+
+<% end %>
+
+<%= link_to 'Back', sites_path %>
+
+
+<script type="text/javascript">
+  onload();
+
+  function select(object_name, method, option) {
+    var field_name = object_name + "_" + method;
+    var current_sel = $("div.selection li[name*=" + field_name + "_]");
+    console.log( current_sel );
+    var new_sel = $("div.selection li[name='"+ field_name + '_' + option + "']");
+    var hidden = $("input#" + field_name);
+    current_sel.removeClass("active");
+    new_sel.addClass("active");
+    new_sel.parent().removeClass("error");
+    hidden.val(option);
+  }
+
+  function old_select(id, field, option) {
+    var current_sel = $("div.selection li[name*=site_" + field + "_]");
+    console.log( current_sel );
+    var new_sel = $("div.selection li[name='"+ id + '_' + option + "']");
+    var hidden = $("input#"+id);
+    current_sel.removeClass("active");
+    new_sel.addClass("active");
+    new_sel.parent().removeClass("error");
+    hidden.val(option);
+  }
+
+function onload() {
+  init_values();
+}
+
+function init_values() {
+  var f = $("form input[type=hidden]");
+  var t;
+  f.each(function(i,e) {
+      e = $(e);
+      if (t = $("form div.selection li[name=" + e.attr('id') + '_' + e.attr('value') + "]"))
+        t.addClass("active");  
+      });
+}
+</script>
+
+<br/>
+<br/>
+<%= h @site.inspect %>
+<%= h @site.errors[:cycle].inspect %>

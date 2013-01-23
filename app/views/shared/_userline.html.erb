@@ -1,0 +1,11 @@
+<div>
+  <%= h DOMAIN %> monitor
+  <% if @active_user.kind_of?(User) -%>
+    - welcome <%= link_to @active_user.name, :controller => 'users', :action => 'show' %>,
+    <%= link_to 'logout', :controller => 'gate', :action => 'logout' %>
+  <% elsif session[:user] == :admin %>
+    - welcome master, <%= link_to 'logout', :controller => 'gate', :action => 'logout' %>
+  <% else # nobody %>
+    <%= link_to "register!", '/register' %>
+  <% end %>
+</div>

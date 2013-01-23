@@ -1,0 +1,6 @@
+<% if @active_user.kind_of?(User) %>
+  welcome <%= h @active_user.name %>
+  <%= link_to 'manage sites', :controller => 'sites' %>
+<% else %>
+  <%= render :partial => "shared/login" %>
+<% end %>

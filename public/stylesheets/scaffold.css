@@ -1,0 +1,168 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+th {
+  text-align:left;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+/*a:hover { color: #fff; background-color:#000; }*/
+a:hover { text-decoration:none; }
+div.selection {
+  margin-bottom:20px;
+}
+div.selection li {
+  display:inline;
+}
+div.selection li a {
+  padding:2px 8px;
+  background:#e8e8e8;
+  cursor:pointer;
+}
+div.selection li a:hover {
+  background:#555;
+}
+div.selection li.active a {
+  background:#55ea2d;
+}
+div.selection li input {
+  display:none
+}
+div.selection li.active input {
+  display:inline;
+}
+div.error li a {
+  background:red;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: #ff438a;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #ff438a;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+table {
+  border-collapse:collapse;
+}
+table th,
+table td {
+  border:1px solid #fff;
+  padding: 1px 4px;
+}
+
+table th.wide {
+  padding-left:28px;
+  padding-right:28px;
+}
+table td.small {
+  font-size:9px;
+}
+
+table tr:hover td {
+  background:#a6daff;
+  cursor:pointer;
+}
+table tr.selected td {
+  background:#ffef3b;
+  cursor:pointer;
+}
+table tr:hover td.attention:hover {
+  background:#ff6349;
+}
+
+table.sites td.good {
+  background:#2ad255;
+  font-weight:bold;
+}
+table.sites td.warn {
+  background:#ffef3b;
+  font-weight:bold;
+}
+table.sites td.error {
+  background:#ff6349;
+  font-weight:bold;
+}
+
+div.explanation {
+  width:30em;
+  font-size:11px;
+}
+
+div.explanation  p {
+  font-size:11px;
+  line-height:120%;
+}
+
+.debug {
+  display:none;
+}
+
+div.statrow {
+  float:left;
+}
+
+div.statrow td, th {
+  text-align:right;
+}
+
+div.clear {
+  clear:both
+}
+
+span.vtc {
+  display:inline-block;
+  width:12em;
+  font-weight:bold;
+  color:#777;
+  text-align:right;
+  margin-right:1em;
+}
+
+table.small {
+  border-collapse:collapse;
+}
+table.small td {
+  border:none;
+}

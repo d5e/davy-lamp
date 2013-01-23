@@ -1,0 +1,30 @@
+<% if @site %>
+<% @site.all_data.each do |k,v| %>
+<span class="vtc"><%= h k %>:</span>
+<%=h v %>
+<br/>
+<% end %>
+
+<p>
+<%= @site.rvlinka %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<% else %>
+maybe not yours ?
+<% end %>
+
+<%= link_to 'Back', sites_path %>
+
+<h3>Stats</h3>
+<%= render :partial => "sites/stats" %>
+
+<h3>Log entries:</h3>
+<label>showing latest <%= link_to n=@log_n[:showing], "?" %> of <%= link_to @log_n[:of], "?logs=all" %> total</label>
+<%= render :partial => "sites/loglist" %>
+
+<script type="text/javascript">
+  $('table tr').bind('click', (function(){
+        $(this).toggleClass('selected');
+        }));
+</script>

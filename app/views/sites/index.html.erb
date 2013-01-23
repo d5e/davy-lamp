@@ -1,0 +1,65 @@
+<h1>Listing sites</h1>
+
+<table class='sites'>
+  <tr>
+    <% if @admin %>
+      <th>uid</th>
+    <% end %>
+    <th>monitoring object</th>
+    <th>conditions</th>
+    <th>cycle</th>
+    <th>lag today</th>
+    <th>lag yesterday</th>
+    <th>last refresh</th>
+    <th colspan=2 class='wide'>state</th>
+    <th><a onclick="toggleEdit();">edit</a></th>
+  </tr>
+
+<% @sites.each do |site| %>
+  <% alink = link_to 'Show', site 
+  jlink = "onclick='window.location=\"#{url_for(site)}\";'"
+  sls_today = site.h_lag_stats
+  sls_yestr = site.h_lag_stats(:yesterday)
+%>
+  <tr>
+    <% if @admin %>
+      <td><%= h site.user_id %></td>
+    <% end %>
+    <td <%=jlink%>><%=h site.mos %></td>
+    <td <%=jlink%>><%=h site.json[:conditions] %></td>
+    <td <%=jlink%>><%=h site.cycle %></td>
+    <td <%=jlink%>><%=h sls_today[:lag_d] %></td>
+    <td <%=jlink%>><%=h sls_yestr[:lag_d] %></td>
+    <td <%=jlink%>><%=h site.last_refresh %></td>
+    <td <%=jlink%> class="<%= css_class site.state %>"><%=h site.state %></td>
+    <td <%=jlink%> class="<%= css_class site.log_state %>"><%= h site.log_state %></td>
+    <td class="edit"><%= alink %></td>
+    <td class="edit"><%= link_to 'Edit', edit_site_path(site) %></td>
+    <td class='edit small attention'><%= link_to 'RM', site, :confirm => 'Really remove?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New site', new_site_path %>
+
+<div class='explanation'>
+<h2>Erklärungen</h2>
+<h3>reverse</h3>
+<p>
+Wird ein Objekt <em>reverse</em> Überwacht, so bedeuetet dies, dass nicht vom Monitoringdienst selbst ein Request an den zu überwachenden Dienst gesendet wird, sondern dass der zu überwachende Dienst sich selbst
+in einem regelmäßigen Zyklus über ein HTTP-Request (z.B. über CURL oder GET) beim monitoring an der zuvor vereinbarten heartbeat-URL meldet.
+</p>
+<h3>state</h3>
+<p>
+Die Spalte State besteht aus 2 Werten. Der erste Wert ist der zuletzt ermittelte Status des Überwachten Objekts. Der Zweite stellt den Status des zuletzt erfassten Logeintrages dar. So ist es auch möglich dass die beiden Werte unterschiedlich sein können. Zum Beispiel im Falle eines TTD bei einem reverse monitoring.
+</p>
+<h3>Funktionsweise reverse</h3>
+<p>
+Beim reverse monitoring sendet der zu überwachende Dienst zyklisch einen HTTP-Request an das Monitoring. Bei jedem diesem Ereignis wird dieser Ping im Log als <em>OK</em> erfasst.
+Bei jedem run des Monitoring Jobs (ca. alle 2 Sekunden) wird dabei überprüft ob der letzte Logeintrag länger zurück liegt, als es die Vorgabe unter <em>cycle</em> erlaubt.
+<br/>Ist dies der Fall ändert sich der Object State auf ERR. Es wird eine Alert-Mail raus geschickt, dies wird wiederum geloggt, damit ist der letzte Logstate <em>NTF</em> für 'notified'.
+Im Falle eines Silent-Monitoring bleibt der letzte Logstate <em>OK</em> da ein nichteintreffen des requests nicht geloggt wird, genauso wenig wie das absichtliche nicht-versenden der Alert-Mail. 
+</p>
+</div>

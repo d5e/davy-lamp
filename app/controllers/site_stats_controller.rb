@@ -1,0 +1,2 @@
+class SiteStatsController < SitesController
+end

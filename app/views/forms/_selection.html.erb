@@ -1,0 +1,32 @@
+<p>
+<%# TODO %>
+  <%= h selection[:title] %><br/>
+  <div class="selection <%= 'error' if @errors[selection[:field]] %>">
+    <% 
+      ff = "#{selection[:form]}_#{selection[:field]}" 
+    %>
+    <% 
+    for option in selection[:options] 
+    if option.kind_of?(Hash)
+      subfield = option[:sub]
+      option = option[:option]
+    else
+      subfield = ""
+    end
+  %>
+  <li name="<%= h "#{ff}_#{option}" %>">
+  
+  <%= "<br/>" if subfield.size > 0 %>
+  <%= subfield %>
+
+  <a name="<%= h "#{ff}_#{option}" %>"
+    onclick="select('<%= h selection[:form] %>', '<%= h selection[:field] %>', '<%= h option %>');"
+    ><%= h option %></a>
+
+
+  </li>
+
+  <% end %>
+  </div>
+  <%= f.hidden_field(h(selection[:field])) %>
+  </p>

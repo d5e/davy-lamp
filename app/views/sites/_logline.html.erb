@@ -1,0 +1,6 @@
+<tr>
+<td><%= h log.created_at.lcshort %></td>
+<td><%= log.lag ? h (log.lag * 1000) : '' %></td>
+<td><%= h log.state %></td>
+<td><%= h log.error %></td>
+</tr>

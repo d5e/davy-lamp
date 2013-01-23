@@ -1,0 +1,18 @@
+<div class='statrow' style="float:left;">
+<%
+  if to = stat[:interval]
+    from = ''
+  elsif f = stat[:for]
+    from = ''
+    to = h f
+  end
+    tcr = @mail ? ' style="text-align:right"' : ''
+  %>
+<table>
+  <tr><th<%=tcr%>><%= from %>&nbsp;</th></tr>
+  <tr><th<%=tcr%>><%= to   %>&nbsp;</th></tr>
+  <tr><td<%=tcr%>><%= h stat[:n] %>&nbsp;</td></tr>
+  <tr><td<%=tcr%>><%= h stat[:lag_d] %>&nbsp;</td></tr>
+  <tr><td<%=tcr%>><%= render :partial => 'sites/results', :object => stat[:results] %>&nbsp;</td></tr>
+  </table>
+</div>

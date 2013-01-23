@@ -1,0 +1,22 @@
+<%
+    if @site
+      stats = @site
+    else
+      @mail = true
+    end
+  %>
+  <br/>
+  <br/>
+<b><%= stats.url_reverse %></b>
+<div class="stats">
+<%= render :partial => 'sites/statheadrow' %>
+<%= render :partial => 'sites/stat', :object => stats.h_lag_stats(:today) %>
+<%= render :partial => 'sites/stat', :object => stats.h_lag_stats(:yesterday) %>
+
+<%#= @mail ? '' : (render :partial => 'sites/stat', :collection => stats.h_lag_stats(:month => -2).reverse) %>
+
+
+<%#= @site.h_lag_stats :day => -7 %>
+
+<div class='clear' style="clear:both;"></div>
+</div>

@@ -1,0 +1,34 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>uid</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Password</th>
+    <th>Salt</th>
+    <th>Emails alert</th>
+    <th>Emails critical</th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%=h user.id %></td>
+    <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
+    <td><%= h(user.password)[0,5] %>...</td>
+    <td><%=h user.salt %></td>
+    <td><%=h user.emails_alert %></td>
+    <td><%=h user.emails_critical %></td>
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Login!', :controller => 'gate',
+      :action => 'master_login', :id => user.id %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user', new_user_path %>

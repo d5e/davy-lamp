@@ -1,0 +1,11 @@
+<table>
+  <tr>
+    <th>timestamp</th>
+    <th><a title="response time">lag (ms)</a></th>
+    <th>code</th>
+    <th>desc</th>
+  </tr>
+<% for log in @log %>
+<%= render :partial => "sites/logline", :locals => {:log => log} %>
+<% end %>
+</table>
