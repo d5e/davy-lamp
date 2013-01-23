@@ -42,8 +42,8 @@ class ApplicationController < ActionController::Base
     redirect_to '/'
   end
 
-  def authenticate(hash)
-    user = User.authenticate(hash[:email], hash[:password])
+  def authenticate(params)
+    user = User.authenticate(params[:email].to_s, params[:password].to_s)
     session[:user] = user if user.kind_of?(User)
   end
 

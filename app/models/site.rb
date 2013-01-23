@@ -135,7 +135,7 @@ class Site < ActiveRecord::Base
     "monitor_dev:site#{self.id}:waiting"
   end
 
-  # called from outside (per http get to heartbeat.sternzeit.de)
+  # shall called from outside (per http get to heartbeat.example.com)
   def reverse_heartbeat!
     refreshed! if self.reverse
   end

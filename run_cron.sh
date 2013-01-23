@@ -2,6 +2,6 @@
 #
 for i in {1..29}
 do
-  curl http://heartbeat.sternzeit.de/heartbeat/run
+  curl http://heartbeat.example.com/heartbeat/run
   sleep 2
 done

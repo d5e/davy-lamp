@@ -46,7 +46,7 @@ class Mailer < ActionMailer::Base
   protected
 
   def sender
-    "sternzeit monitor <monitor@#{DOMAIN}>"
+    "#{DOMAIN} monitor <monitor@#{DOMAIN}>"
   end
 
   def recip(arg=nil)
